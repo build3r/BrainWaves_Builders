@@ -1,0 +1,306 @@
+/* 
+    Document   : layoutDesign
+    Created on : Aug 27, 2013, 1:47:46 PM
+    Author     : i047188
+    Description:
+        CSS of layout design tab.
+		.vp-main-design
+*/
+
+#mainTabLayoutDesign {}
+
+.vp-main-design-chart {
+	position: absolute;
+	top:20%;
+	right: 10%;
+	bottom:20%;
+	left: 10%;
+	overflow: hidden;
+	background: rgb(150,150,150);
+}
+
+.vp-main-design-module {
+/*	position: relative;
+	margin: 7.5% 10%;*/
+	position: absolute;
+	top: 10%;
+	right: 10%;
+	bottom: 10%;
+	left: 10%;
+}
+
+#vp-use-div-container-checkbox {
+	position: absolute;
+	top: 80%;
+	left: 10%;
+	margin: 10px auto;
+}
+
+
+.vp-module-container {
+	position: absolute;
+	color: rgb(242,242,242);
+	font: 12px Arial;
+}
+
+#plot {
+	color: rgb(26,26,26);
+}
+
+#plot:not(.select) {
+	background: transparent;
+}
+
+.vp-module-container.drop-hint {
+	border: rgb(230,230,230) dashed 1pt;
+}
+
+
+.vp-module-container.has-module {
+	background: rgb(192,192,192);
+	border: rgb(230,230,230) dotted 1pt;
+}
+
+.vp-module-container.select, .vp-main-design-chart.select {
+	background: rgb(174,183,195);
+	border: rgb(77, 77, 77) dotted 1pt;
+}
+
+
+.vp-pos-top, .vp-pos-bottom {
+	height: 6%;
+	left: 13%;
+	right: 13%;
+}
+
+.vp-pos-top {
+	top: 0px;
+}
+
+.vp-pos-bottom {
+	bottom:0px;
+}
+
+.vp-pos-left, .vp-pos-right {
+	width: 12%;
+	top: 7.5%;
+	bottom: 7.5%;
+}
+
+.vp-pos-left {
+	left: 0px;
+	z-index: 2;
+}
+
+/* #left .module-title {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    writing-mode: lr-tb;
+} */
+
+.vp-pos-right {
+	right: 0px;
+}
+
+/* #right .module-title {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    writing-mode: lr-tb;
+}
+ */
+#plot {
+	left: 13%;
+	right: 13%;
+	top: 7.5%;
+	bottom: 7.5%;
+}
+
+.module {
+	position: static;
+	float: left;
+	overflow: visible!important;
+}
+
+.module-title {
+	font-size: 12px;
+}
+
+.remove-module {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	right: -9px;
+	top: -8px;
+	background: url("../resources/btnRemove.png");
+	cursor: pointer;
+}
+
+.vp-pos-top .remove-module, .vp-pos-bottom .remove-module {
+	right: -7px;
+	top: -9px;
+}
+
+.module {
+	display:table!important;
+}
+
+.module > div {
+	display:table-cell;
+	vertical-align:middle;
+	text-align: center;
+}
+
+
+/*******properties*******/
+#properties {
+	position: fixed;
+	display: none;
+	left: 100px;
+	top: 400px;
+	width: 350px;
+	background: black;
+	opacity: .8;
+	border-radius: 6px;
+	font-size: 12px!important;
+	z-index: 100;
+}
+
+.vp-main-design-properties-head {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	height: 35px;
+	border-bottom: 1px solid gray;
+	color: gray;
+	padding: 9px 10px 11px 20px;
+}
+
+.vp-main-design-properties-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 12px;
+	height: 12px;
+	background: url(../resources/closeProperty.png);
+	cursor: pointer;
+}
+
+.vp-main-design-properties-title {
+	color: white;
+}
+
+.vp-main-design-properties-list {
+	position: relative;
+	margin: 50px 0px 10px;
+}
+
+.prop-group {
+	position: relative;
+	display:-moz-box; /* Firefox */
+	display:-webkit-box; /* Safari and Chrome */
+	display:-ms-flexbox; /* Internet Explorer 10 */
+	display:box;	
+	width: 100%;
+	height: 30px;
+	padding: 5px 15px 5px 0px;
+}
+
+.prop-label {
+	text-align: right; 
+	width: 80px;
+	display:block;
+	padding-right: 10px;
+	color: rgb(242,242,242);
+	font-size: 12px!important;
+}
+.prop-input {
+/*	-moz-box-flex:2.0;  Firefox 
+	-webkit-box-flex:2.0;  Safari and Chrome 
+	-ms-flex:2.0;  Internet Explorer 10 
+	box-flex:2.0;
+	display:block;*/
+	color: rgb(26,26,26)!important;
+	height: 20px!important;
+	position: absolute!important;
+	left: 90px!important;
+	right: 20px!important;
+	padding: 0px!important;
+	width: auto;
+	font-size: 12px!important;
+}
+
+
+/*module bar*/
+.vp-main-design-tb {
+	position: absolute; 
+	top: 20px;
+	height: 65px; 
+	width: 180px; 
+	background: black;
+	opacity:0.7;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.vp-main-design-tb .vp-module-item {
+	position: relative;
+	display: inline-block;
+	margin: 12px 20px;
+	width: 48px;
+	height: 60px;
+	background-repeat: no-repeat; 
+	background-position: top center;
+}
+
+.vp-module-item-separator {
+	position: relative;
+	display: inline-block;
+	width: 3px;
+	height: 40px;
+	background-image: url("../resources/sideBarSeparator.png");
+	opacity: .5;
+	background-repeat: no-repeat; 
+	background-position: center center;
+}
+
+.vp-module-item-name {
+	position: relative;
+	/*bottom: 15px;*/
+	margin-top: 30px;
+	font: normal 12px Arial;
+	text-align: center;
+	width: 100%;
+}
+
+/*.vp-main-design-tb .vp-module-item > div {
+	position: absolute;
+	bottom: 15px;
+	font: normal 12px Arial;
+	text-align: center;
+	width: 100%;
+}*/
+
+.vp-main-design-tb .vp-module-item {
+	color: rgb(242,242,242);
+}
+
+.vp-main-design-tb .vp-module-item[disabled] {
+	color: gray;
+}
+
+#vpModuleItem-title {
+	background-image: url("../resources/layoutTBTitle.png");
+}
+
+#vpModuleItem-title[disabled] {
+	background-image: url("../resources/layoutTBTitle2.png");
+}
+#vpModuleItem-legend {
+	background-image: url("../resources/layoutTBLegend.png");
+}
+#vpModuleItem-legend[disabled] {
+	background-image: url("../resources/layoutTBLegend2.png");
+}

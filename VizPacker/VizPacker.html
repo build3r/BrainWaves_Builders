@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>SAP VizPacker</title>
+	<link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="libs/CodeMirror/lib/codemirror.css" rel="stylesheet">
+	<link href="libs/CodeMirror/theme/vibrant-ink.css" rel="stylesheet">
+	<link href="libs/CodeMirror/theme/no-highlight.css" rel="stylesheet">
+	<link href="libs/vizPacker/css/index.css" rel="stylesheet">
+	<link href="libs/vizPacker/css/toolbar.css" rel="stylesheet">
+	<link href="libs/vizPacker/css/layoutDesign.css" rel="stylesheet">
+	<link href="libs/vizPacker/css/dataTable.css" rel="stylesheet">
+	<link href="libs/vizPacker/css/codeEditor.css" rel="stylesheet">
+	<link href="libs/intro.js/introjs.css" rel="stylesheet" />
+	<script src="libs/zip.js/zip.js"></script>
+	<script src="libs/zip.js/inflate.js"></script>
+	<script src="libs/zip.js/deflate.js"></script>
+	<script src="libs/zip.js/zip-fs.js"></script>
+	<script src="libs/zip.js/zip-ext.js"></script>
+	<script src="libs/intro.js/intro.js"></script>
+	<script data-main="libs/vizPacker/libs/index" src="../../libs/require.js"></script>
+	<script src="../../libs/jquery.js"></script>
+	<script src="../../libs/d3.v2.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
+	<script src="libs/CodeMirror/lib/codemirror.js"></script>
+	<script src="libs/CodeMirror/mode/xml/xml.js"></script>
+	<script src="libs/CodeMirror/mode/javascript/javascript.js"></script>
+	<script src="libs/CodeMirror/mode/css/css.js"></script>
+	<script src="libs/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="libs/CodeMirror/addon/search/searchcursor.js"></script>
+    <script src="libs/CodeMirror/addon/search/match-highlighter.js"></script>	
+	<script src="libs/vizPacker/libs/sap/viz/vizpacker/addon/fold/foldcode.js"></script>
+	<script src="libs/CodeMirror/addon/fold/brace-fold.js"></script>
+	<script src="libs/CodeMirror/addon/fold/xml-fold.js"></script>
+	<script type="text/javascript">
+	    require(['../../vizPacker/libs/sap/viz/vizpacker/initPage'], function(_initPage){_initPage();});
+	</script>
+</head>
+<body>
+	<div id="vpLoading" class="vp-full vp-loading"><div class="vp-loading-title">Initializing...</div></div>
+	<div id="toolbar" >
+		<div><div id="vp-tb-title" class="vp-tb-title"></div>
+		<div id="vp-tb-btns-group" class="vp-tb-btns-group">
+			<a id="vp-tb-btn-pack" class="vp-tb-btn-pack" href="#dialogPack" data-toggle="modal"></a>
+			<div id="vp-tb-btn-sep1" class="vp-tb-btn-sep vp-tb-btn-sep1"></div>
+			<a id="vp-tb-btn-deploy" class="vp-tb-btn-deploy vp-tooltip" data-placement="bottom" title="Deploy to SAP Lumira" href="#dialogDeploy" data-toggle="modal"></a>
+			<div id="vp-tb-btn-sep2" class="vp-tb-btn-sep vp-tb-btn-sep2"></div>
+			<a id="vp-tb-btn-save" class="vp-tb-btn-save vp-tooltip" data-placement="bottom" title="Save" href="#"></a>
+			<div id="vp-tb-btn-load-wrapper" class="vp-tb-btn-load-wrapper vp-tooltip" data-placement="right" title="Open">
+				<img src="libs/vizPacker/resources/btnLoad.png">
+				<input class="vp-tb-btn-load" type="file" name="file1" accept=".profile"/>
+			</div>
+			<div id="vp-tb-btn-sep3" class="vp-tb-btn-sep vp-tb-btn-sep3"></div>
+			<a class="vp-tb-btn-tour vp-tooltip" data-placement="bottom" title="Tutorial" href="#dialogStartTutorial" data-toggle="modal" data-transition-to:"pop"></a>
+		</div>
+	</div>
+	
+	<div id="mainNew">
+		<div id="vp-main-btn-dock" class="vp-main-btn-dock vp-tooltip" data-placement="bottom" title="Dock tabs to the left"></div>
+		<ul id="main-nav-tabs"class="nav nav-tabs">
+			<li class="active">
+				<a href="#mainTabLayoutDesign" data-toggle="tab" class='vp-main-tab layout-tab'>LAYOUT DESIGN</a>
+			</li>
+			<li>
+				<a href="#mainTabDataModel" data-toggle="tab" class='vp-main-tab'>DATA MODEL</a>
+			</li>
+		</ul>	
+		<div class="tab-content vp-main-tab-content">
+			<div class="tab-pane active" id="mainTabLayoutDesign">
+				<div id="vp-main-design-tb" class="vp-main-design-tb">
+				</div>				
+				<div id="vp-main-design-chart" class="vp-main-design-chart">
+					<div class="vp-main-design-module">
+						<div class="vp-module-container vp-pos-top"></div>
+						<div class="vp-module-container vp-pos-left"></div>
+						<div id="plot" class="vp-module-container vp-pos-center"></div>
+						<div class="vp-module-container vp-pos-right"></div>
+						<div class="vp-module-container vp-pos-bottom"></div>
+					</div>
+				</div>
+				<div id="vp-use-div-container-checkbox">
+					<input id="vpUseDivContainer" type="checkbox">
+					<label for="vpUseDivContainer" style="display:inline-block; margin-left: 5px; margin-bottom: 0px; font-size: 14px; cursor: pointer;">
+						Use DIV Container
+					</label>
+				</div>				
+			</div>
+			<div class="tab-pane" id="mainTabDataModel">
+				<div id="dataModelTabContainer" style="overflow:auto;">
+					<div id="vp-dt-container" class="vp-dt-container">
+                        <div id="vp-dt-file-upload-area">
+                            <div style="width:100%;margin-bottom:4px;">
+                                <div style="font-family:Arial, Helvetica, sens-serif;font-size:12px;display:inline-block;font-weight:bold;">UPLOAD DATA FROM CSV:</div>
+                                <div style="display:inline-block;margin-left:5px;">
+                                    <img id="vp-dt-upload-info" class="vp-dt-info-btn" src="./libs/vizPacker/resources/info.png"/>
+                                </div>
+                            </div>
+                            <table style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <input class="vp-dt-load" type="file"/>
+                                    <input class="vp-dt-load-text" />
+                                </td>
+                                <td width=100 style="text-align: right;">
+                                    <div class="vp-dt-load-btn">UPLOAD</div>
+                                </td>
+                            </tr>
+                            </table>
+                            <div style="padding-top:3px;overflow: hidden;">
+                            	Delimiter: 
+                            	<select id="vp-dt-delimiter-selection" style="background:rgb(191,191,191); width:100px; height:24px">
+                            		<option value="Comma">Comma</option>
+                            		<option value="Tab">Tab</option>
+                            		<option value="Semicolon">Semicolon</option>
+                            		<option value="Space">Space</option>
+                            		<option value="Other">Other</option>
+                            	</select>
+                            	<input id="vp-dt-delimiter-other-text" type="text" style="background:rgb(191,191,191); width:20px; height:16px" disabled="true">
+                            	<input id="vp-dt-load-first-row-header" type='checkbox' checked="true" style="margin:0px;margin-bottom:2px;"/>
+                                <label for="vp-dt-load-first-row-header" style="padding-left:5px;display: inline-block;">Set first row as columns names</label>
+                            </div>
+                        </div>	
+                        <table id="vp-dt-table-main">
+                            <tr>
+                                <td>								
+                                    <div style="width:100%;display:inline-block;">
+                                        <div style="font-family:Arial, Helvetica, sens-serif;font-size:12px;display:inline-block; font-weight:bold;">DATA TABLE:</div>
+                                        <div style="display:inline-block;margin-left:5px;">
+                                            <img id="vp-dt-table-info" class="vp-dt-info-btn"  src="./libs/vizPacker/resources/info.png"/>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width=100 style="text-align: right;">
+                                    <div id="vp-dt-apply-btn" style="margin-left:23px;">APPLY</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <div style="display:inline-block;margin:0px;padding:0px;">
+                                        <table class="vp-dt-table">
+                                            <thead></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <div style="position:relative;display:inline-block;margin-top:5px;font-size:12px;border:1px dotted white;max-width:720px;overflow:hidden;">
+                                        <div style="margin-left:15px;display:inline-block;font-size:inherit;"># of dimensions: </div>
+                                        <div id="vp-dt-number-of-dim" style="color:white;display:inline-block;margin-right:15px;font-size:inherit;">0</div>|
+                                        <div style="margin-left:5px;display:inline-block;font-size:inherit;"># of measures: </div>
+                                        <div  id="vp-dt-number-of-measure" style="color:white;display:inline-block;margin-right:15px;font-size:inherit;">0</div>
+                                        <div style="background-color:rgb(195,195,195);display:inline-block;padding-left:15px;font-size:inherit;padding-right:20px;">
+                                            <div style="margin-left:5px;display:inline-block;color:black;font-size:inherit;"># of rows: </div>
+                                            <div  id="vp-dt-number-of-rows" style="color:black;display:inline-block;font-size:inherit;">0</div>
+                                        </div> 
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+						
+
+						<div style="margin: 10px auto;">
+							<input id="vpUseFlattenTable" type="checkbox">
+							<label for="vpUseFlattenTable" style="display:inline-block; margin-left: 5px; margin-bottom: 0px; font-size: 14px; cursor: pointer;">
+								Use Flat Table <span style="font-size:10px;"><i>*Not supported in Lumira</i></span>
+							</label>
+					   </div>						
+						
+					</div>
+				</div>
+			</div>
+		</div>  		
+	</div>
+	<div class="handle main"></div>
+	<div id="fullscreenCodeEditor" class="vp-editor">
+		<div id="vp-editor-btn-fullscreen" class="vp-editor-btn-fullscreen vp-tooltip" data-placement="bottom" title="Expand code editor"></div>
+		<div style="position:absolute; top:0px; left:0px; right:0px;bottom:0px;">
+			<div id="vp-editor-title"class="vp-editor-title"></div>
+			<div id="vp-editor-toggle-code-preview" class="vp-editor-toggle vp-tooltip" data-placement="top" title="Turn on / off modes of coding / preview"></div>
+			<div id="vp-editor-btn-apply" class="vp-editor-btn-apply code-only"></div>
+			<img src="./libs/vizPacker/resources/btnRunTip.png" width="258px" height="80px" class="vp-editor-applied-tip" usemap="#vpEditorAppliedTipMap">
+			<map id="vpEditorAppliedTipMap" name="vpEditorAppliedTipMap">
+				<area shape="rect" coords="238,9,258,29" class="vp-editor-applied-tip-close">
+			</map>
+			<div class="vp-editor-preview-panel">
+				<iframe id="preview" src="about:blank" width="100%" height="100%"></iframe>
+			</div>
+			<div class="handle"></div>
+			<div class="vp-editor-edit-panel code-only">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a id="tabEditorRenderJs" href="#editorRenderJs" data-toggle="tab" class='vp-editor-tab'>render.js</a>
+					</li>
+					<li>
+						<a id="tabEditorDataMappingJs" href="#editorDataMappingJs" data-toggle="tab" class='vp-editor-tab'>dataMapping.js</a>
+					</li>
+					<li>
+						<a id="tabEditorHtml" href="#editorHtml" data-toggle="tab" class='vp-editor-tab'>HTML</a>
+					</li>
+					<li style="display:none;">
+						<a id="tabEditorFlowJs" href="#editorFlowJs" data-toggle="tab" class='vp-editor-tab'>flow.js</a>
+					</li>
+					<li style="display:none;">
+						<a id="tabEditorModuleJs" href="#editorModuleJs" data-toggle="tab" class='vp-editor-tab'>module.js</a>
+					</li>
+					<li style="display:none;">
+						<a id="tabEditorBundleJs" href="#editorBundleJs" data-toggle="tab" class='vp-editor-tab'>bundle.js</a>
+					</li>
+					<li style="display:none;">
+						<a id="tabEditorUtilJs" href="#editorUtilJs" data-toggle="tab" class='vp-editor-tab'>utils/util.js</a>
+					</li>
+					<li style="display:none;">
+						<a id="tabEditorCSS" href="#editorCSS" data-toggle="tab" class='vp-editor-tab'>style.css</a>
+					</li>
+					<li id="filePickerContainer">
+							<a id="tabMore" class='vp-editor-tab'>>></a>
+							<ul id="vp-editor-file-picker">
+								
+							</ul>
+					</li>
+				</ul>	
+				<div class="tab-content">
+					<div class="tab-pane active" id="editorRenderJs"></div>
+					<div class="tab-pane" id="editorDataMappingJs"></div>
+					<div class="tab-pane" id="editorFlowJs"></div>
+					<div class="tab-pane" id="editorModuleJs"></div>
+					<div class="tab-pane" id="editorBundleJs"></div>
+					<div class="tab-pane" id="editorUtilJs"></div>
+					<div class="tab-pane" id="editorHtml"></div>
+					<div class="tab-pane" id="editorCSS"></div>
+				</div>  
+			</div>
+		</div>
+	</div>
+	
+	<div id="properties">
+		<div class="vp-main-design-properties-head">
+			Property Setting: <span class="vp-main-design-properties-title"></span>
+		</div>
+		<div class="vp-main-design-properties-close"></div>
+		<div class="vp-main-design-properties-list"></div>
+	</div>
+
+	<div id="tutorial">
+	  <div id="myCarousel" class="carousel slide">
+		<ol class="carousel-indicators">
+		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#myCarousel" data-slide-to="1"></li>
+		  <li data-target="#myCarousel" data-slide-to="2"></li>
+		  <li data-target="#myCarousel" data-slide-to="3"></li>
+		  <li data-target="#myCarousel" data-slide-to="4"></li>
+		  <li data-target="#myCarousel" data-slide-to="5"></li>
+		  <li data-target="#myCarousel" data-slide-to="6"></li>
+		  <li data-target="#myCarousel" data-slide-to="7"></li>
+		</ol>
+		<div class="carousel-inner">
+		  <div class="item active">
+			<img src="libs/vizPacker/resources/tutorial/1.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/2.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/3.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/4.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/5.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/6.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/7.png" alt="">
+		  </div>
+		  <div class="item">
+			<img src="libs/vizPacker/resources/tutorial/8.png" alt="">
+			<div id="carouselClose" style="position:absolute; cursor: pointer; left: 55%; right: 20%; top: 67.77777777%; bottom: 28.999999%"></div>
+		  </div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	  </div>
+	</div>
+
+
+
+<!--=============================== Dialog, Alert, etc. ===============================-->	
+<!-- pack -->
+	<div id="dialogPack" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div role="remove" data-dismiss="modal" aria-hidden="true"></div>
+		<div>
+			<img src="libs/vizPacker/resources/checkmark.png" style="float: left;">
+			<h3 role="title" style="position: relative; left: 10px;">It's been packed successfully!</h3>
+		</div>
+		<div role="separator"></div>
+		<div class="modal-body">
+			<ul>
+				<li><p style="font-size: 12px;">Pick the type of file you want to download</p></li>
+				<!--li><img id="logoBG2" src="libs/vizPacker/resources/dlJS.png"><a id="downloadCode" href="#">Download Code</a></li-->
+				<li><img id="logoBG2" src="libs/vizPacker/resources/dlZip.png"><a id="downloadZip" href="#">Download Zip</a></li>
+			</ul>
+		</div>
+		<div id="packDetails" style="display: none;">
+			<div class="detailsContent">
+				<img src='libs/vizPacker/resources/zipdetails.png'>
+			</div>
+			<div class="detailsBackground"></div>
+		</div>
+		<div role="separator"></div>
+		<div role="footer">
+			<img src="libs/vizPacker/resources/btnDrillDown.png" id="showDetails" style="position: absolute; left: 22px; margin-top: 1px;">
+			<p style="float:left; margin-left: 25px; font-size: 12px;">SHOW DETAILS</p>
+<!-- 			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button> -->
+		</div>
+	</div>
+
+<!-- deploy to lumira -->
+	<div id="dialogDeploy" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div role="remove" data-dismiss="modal" aria-hidden="true"></div>
+		<div>
+			<h3 role="title">Deploy to SAP Lumira</h3>
+		</div>
+		<div role="separator"></div>
+		<div class="modal-body">
+			<ol>
+				<li>Unzip the .zip file; for example, &lt;extension_name&gt;.zip</li>
+    			<li>Modify extension.js based on needs; for example, add implementation code to draw shapes in the plot area. (1)</li>
+    			<li>Copy the whole unzipped folder into SAP Lumira extensions folder; for example, copy the folder of &lt;extension_name&gt; into  “ C:\Program Files\SAP Lumira\Desktop\extensions”;</li>
+    			<li>Open SAP Lumira; the extension can be chosen from the chart type list. </li>
+			</ol>
+			(1)Packer only generates the extension structure and startup scripts for creating an extension.
+			You might need to modify extension.js according to your needs before deploying to SAP Lumira.
+		</div>
+		<div role="separator"></div>
+		<div role="footer">
+			<img src="libs/vizPacker/resources/btnOK.png" data-dismiss="modal" aria-hidden="true">
+<!-- 			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK, I got it</button> -->
+		</div>
+	</div>	
+	
+	
+<!-- start tutorial -->
+	<div id="dialogStartTutorial" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div id="startRemove" role="remove" data-dismiss="modal" aria-hidden="true"></div>
+		<div>
+			<h3 role="title">What is <span style="color:lightblue; font-style: italic;">VizPacker</span> ?</h3>
+		</div>
+		<div role="separator"></div>
+		<div class="modal-body">
+			<p>VizPacker is a handy tool that helps visualization developers easily design, build, and preview a
+			     chart based on CVOM SDK. VizPacker will auto-create a package for the CVOM chart extension; the package includes a set of fundamental codes and files based on the visualization module and data schema.</p>
+		    <p>VizPacker is meant to help users to quickly use the implementation workflow and avoid 
+		        unnecessary issues or problems. </p>
+		</div>
+		<div role="separator"></div>
+		<div role="footer" style="padding-top:10px;">
+		    <span id="chooseZone" style="padding-right:90px;">
+		        <input id="chooseCheckbox" type="checkbox" checked="true" style="margin-bottom: 8px;"/>
+		        <span>&nbsp;Don't show it next time.</span>
+		    </span>
+			<img id="btnStartTutorial" src="libs/vizPacker/resources/btnStartTutorial.png"> <!-- data-dismiss="modal" aria-hidden="true" -->
+		</div>
+	</div>	
+
+<!-- end tutorial -->
+    <div id="dialogEndTutorial" class="modal hide fade" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div role="remove" data-dismiss="modal" aria-hidden="true"></div>
+        <div>
+            <h3 role="title">What's <span style="color:lightblue; font-style: italic;">next</span> ?</h3>
+        </div>
+        <div role="separator"></div>
+        <div class="modal-body" style="overflow: hidden;">
+            <p>After getting the packed extension zip bundle, you are free to unzip it and switch to another code editor, such as Notepad or Eclipse, for further development. 
+                Once you've finished, you are able to deploy the extension to Lumira and debug it in Lumira debug mode. </p> 
+            <p>If you want to debug the extension in web browsers locally first before deploying it into Lumira,all of the required libraries are under directory</br>“&ltSAP Lumira installation directory&gt/Desktop/libs/”.</p>
+            
+        </div>
+        <div role="separator"></div>
+        <div role="footer">
+            <img id="btnEndTutorial" src="libs/vizPacker/resources/btnEndTutorial.png">
+        </div>
+    </div>
+                
+<!-- edit func -->
+	<div id="dialogFunc" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true" style="height: 80%;">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Edit Module Function</h3>
+		</div>
+		<div class="modal-body" style="position: absolute; max-height: 100%; left:0px; right:0px; top:0px; bottom:0px;">
+			<div id="funcDiv">
+				<textarea name="func">aaaa</textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+		</div>
+	</div>
+	
+	
+<!-- add/edit feed -->
+	<div id="dialogFeed" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Add/Edit Feed</h3>
+		</div>
+		<div class="modal-body">
+			<input type="hidden" name="sid" />
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>id</td>
+						<td><input name="id" type="text" value="viz.ext.samples.bar.plot"/></td>
+					</tr>
+					<tr>
+						<td>name</td>
+						<td><input name="name" type="text" value="Sample Bar"/></td>
+					</tr>
+					<tr>
+						<td>type</td>
+						<td>
+							<select name="type">
+								<option value="Dimension">Dimension</option>
+								<option value="Measure">Measure</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>min</td>
+						<td><input name="min" type="text" value="0"/></td>
+					</tr>
+					<tr>
+						<td>max</td>
+						<td><input name="max" type="text" value="1"/></td>
+					</tr>
+					<tr>
+						<td>index</td>
+						<td><input name="index" type="text" value="0"/></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button id="btnSaveFeed" class="btn btn-primary">Save changes</button>
+		</div>
+	</div>
+	
+<!-- alert template -->
+<div id="alertTemplate"  style="display:none;">
+	<div class="alert">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<span></span>
+	</div>
+</div>	
+
+<!--=============================== template of generated html file ===============================-->	
+<!-- HTML Template -->
+	<textarea id="templateHTML"	style="display:none;">
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Hello World Extension</title>
+		<!-- <<deps -->
+		<script type="text/javascript" src="../../../libs/require.js"></script>
+		<script type="text/javascript" src="../../../libs/d3.v2.js"></script>
+		<script type="text/javascript" src="../../../libs/jquery.js"></script>
+		
+		<script type="text/javascript" src="../../../libs/sap.viz.js"></script>
+
+		<!-- DO NOT CHANGE THE ORDER OF THE ABOVE SCRIPTS, OR INSERT ANYTHING BETWEEN THEM -->
+
+		<!-- deps>> -->
+		<script id="prepare" type="text/javascript">
+			// Create and initialize the extension in an requireJS manner
+         	// Config the baseUrl for requireJS to find the specific module or file
+            requirejs.config({
+                 baseUrl : '"%baseUrl%"'
+            });
+            require([ '"%libName%"-bundle' ], function() {
+				//chart option
+				var chartPoperties = {
+				    //%titleStart
+					title : {
+						visible : true,
+						text : "Chart Title",
+						alignment : '"%titleAlignment%"',
+					}, //%titleEnd
+					'"%propertyCategory%"': {
+                    	borderColor: "none"
+					},
+					//%legendStart
+					legend:{
+					    visible : true,
+					    drawingEffect : '"%legendDrawingEffect%"'
+					}//%legendEnd
+				};
+				//dataset used by the chart
+				/*<<data*/
+				var data = "json data are put here";
+				/*data>>*/
+				
+				function onTplLoad() {
+					//create chart after applying template
+					/*<<create*/
+					"here is code of creating chart"
+					/*create>>*/
+					//listen the barData event raised from the extension
+					chart.on("barData", function(d) {
+						alert("Data: " + d.join(" = "));
+					});
+					$(window).resize(function(){
+						chart.size({
+							width: $("#chart").width(),
+							height: $("#chart").height()
+						})
+					});
+				};
+				function onTplFail() {
+				};
+				// set template loadPath
+				/*<<template*/
+				sap.viz.api.env.Resource.path("sap.viz.api.env.Template.loadPaths", ["../templates"]);
+				sap.viz.api.env.Template.set("sample", onTplLoad, onTplFail);
+				/*template>>*/
+			});
+		</script>
+	</head>
+	<body>
+		<!-- <<container -->
+		<div id="chart" style="position: absolute; left:0px; right: 0px; top:0px; bottom:0px; background-color: #ffffff"></div>
+		<!-- container>> -->
+	</body>
+</html>	
+	</textarea>
+
+
+<!--=============================== Others ===============================-->
+<!-- template of Data Model -->	
+<div id="dmBlockTemplate" style="display:none;">
+	<span role="title">Measure Set</span>:
+	<div role="idInput">
+		<label class="dmLabel" for='dmMSID'>ID:</label>
+		<input class="dmInput" id="dmMSID" type="text">
+	</div>
+	<div role="nameInput">
+		<label class="dmLabel" for='dmMSName'>Name:</label>
+		<input class="dmInput" id="dmMSName" type="text">
+	</div>
+	<div role="footer"># of <span role="numTitle">measures</span>: <a href="#" role="numMinus"></a><input readonly type="text" role="num" value=1><a href="#" role="numAdd"></a></div>
+</div>
+
+<!-- template of code finder -->
+<div id="codeFinderTemplate" style="display:none;">
+    <div viz-role="close-finder"></div>
+    <div>
+        <span viz-role="title">Find what: </span>
+        <input type="text" viz-role="find-value" value="">
+        <div viz-role="find">Find</div>
+        <div viz-role="highlight-all">Highlight All</div>
+    </div>
+    <div>
+        <span viz-role="title">Replace with: </span>
+        <input type="text" viz-role="replace-value" value="">
+        <div viz-role="replace">Replace</div>
+        <div viz-role="replace-all">Replace All</div>
+    </div>
+</div>
+
+<!-- template of data table -->
+<div id="dataPanel">
+	<table class="vp-dt-table-template">
+		<thead>
+			<th style="position: relative;">
+				<span style="border-right: 1px solid black;height: 30px;width: 60px;overflow:visible;display:inline-block;padding-right: 3px;">
+				    <span class="vp-dt-field-name"></span></span>
+				<img class="vp-dt-field-type-icon" src="./libs/vizPacker/resources/iconDimension.png"></img>
+				<img class="vp-dt-field-type-picker-button" src="./libs/vizPacker/resources/arrow-down.png"/>
+				<img class="vp-dt-field-remove" src="./libs/vizPacker/resources/dele_column.png"/>
+				
+			</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>	
+		
+</div>
+<div class="vp-dt-field-type-picker">
+	<div id="vp-dt-field-type-picker-dim" class="vp-dt-field-type-picker-menu" style="position:relative">
+		<form style="width:100%;margin-bottom:0px">
+		<img style="display:inline-block;" src="./libs/vizPacker/resources/iconDimension.png"/>
+        <span class="vp-dt-field-type">Dimension</span><span class="vp-dt-field-type-picker-cur-idx"></span>
+		<img class="vp-dt-submenu_indicator" style="float:right" src="./libs/vizPacker/resources/arrow-right.png"/>
+		</form>
+		<div class="vp-dt-field-type-picker-submenu">
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <form name="dimensionSet" style="width:100%;margin-bottom:0px">
+                            <input type="radio" name="dimensionSetPicker" id="dimensionSet1Picker" class="vp-dt-field-type-set-radio" checked="checked" value="0">
+                            <label id="dimensionSet1Name" viz-for="dimensionSet1Picker" class="vp-dt-field-type-set-name">X Axis</label>
+                            <input type="radio" name="dimensionSetPicker" id="dimensionSet2Picker" class="vp-dt-field-type-set-radio" value="1">
+                            <label id="dimensionSet2Name" viz-for="dimensionSet2Picker" class="vp-dt-field-type-set-name">Set 2</label>
+                        </form>                        
+                    </td>
+                    <td width="24" style="text-align: center;">
+                        <img id="vp-dt-ds-info" class="vp-dt-info-btn" src="./libs/vizPacker/resources/info.png"/>
+                    </td>
+                </tr>
+            </table>
+		</div>
+	</div>
+	<div id="vp-dt-field-type-picker-measure" class="vp-dt-field-type-picker-menu" style="position:relative">
+		<form style="width:100%;margin-bottom:0px">
+			<img style="display:inline-block;" src="./libs/vizPacker/resources/iconMeasure.png"/>
+			<span class="vp-dt-field-type">Measure</span><span class="vp-dt-field-type-picker-cur-idx"></span>
+			<img class="vp-dt-submenu_indicator" style="float:right" src="./libs/vizPacker/resources/arrow-right.png"/>
+		</form>
+		<div class="vp-dt-field-type-picker-submenu">
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <form name="measureSet" style="width:100%;;margin-bottom:0px">
+                            <input type="radio" name="measureSetPicker" id="measureSet1Picker" class="vp-dt-field-type-set-radio" value="0">
+                            <label id="measureSet1Name" viz-for="measureSet1Picker" class="vp-dt-field-type-set-name">Y Axis</label>
+                            <input type="radio" name="measureSetPicker" id="measureSet2Picker" class="vp-dt-field-type-set-radio" value="1">
+                            <label id="measureSet2Name" viz-for="measureSet2Picker" class="vp-dt-field-type-set-name">Set 2</label>
+                            <input type="radio" name="measureSetPicker" id="measureSet3Picker" class="vp-dt-field-type-set-radio" value="2">
+                            <label id="measureSet3Name" viz-for="measureSet3Picker" class="vp-dt-field-type-set-name">Set 3</label>
+                        </form>
+                    </td>
+                    <td width="24" style="text-align: center;">
+                        <img id="vp-dt-ms-info" class="vp-dt-info-btn" src="./libs/vizPacker/resources/info.png"/>
+                    </td>
+                </tr>
+            </table>
+		</div>
+	</div>
+</div>
+<div id="vp-dt-info_bubble" style="display:none;position:absolute;top:200px; left:200px;width:301px;height:45px;z-index:1000;">
+	<div style="position:absolute;left:0px;width:15px;height:45px;display:inline;padding-top:14px;">
+		<img src="./libs/vizPacker/resources/pointer.png" />
+	</div>
+	<div id="vp-dt-info_bubble_content"></div>
+</div>
+
+<a id="endTutorialTrigger" href="#dialogEndTutorial" data-toggle="modal" style="visible:hidden;display: none;"></a>
+
+
+</body>
+</html>

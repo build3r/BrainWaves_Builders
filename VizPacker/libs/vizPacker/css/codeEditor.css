@@ -1,0 +1,409 @@
+/* 
+    Document   : editor
+    Created on : Aug 23, 2013, 11:33:41 AM
+    Author     : i047188
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+/*code*/
+.CodeMirror {
+	position: absolute;
+	width: 100%;
+	font: 13px monospace;
+}
+
+
+.CodeMirror-foldmarker {
+	color: blue;
+	text-shadow: #b9f 1px 1px 2px, #b9f -1px -1px 2px, #b9f 1px -1px 2px, #b9f -1px 1px 2px;
+	font-family: arial;
+	line-height: .3;
+	cursor: pointer;
+}
+
+.code-editor-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left:0px;
+    right:0px;
+}
+
+.CodeMirror-scroll {
+    overflow-x: hidden;
+}
+
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+    background-color: rgb(75,80,75);
+}
+
+.code-editor-container .CodeMirror-vscrollbar::-webkit-scrollbar-track, .code-editor-container .CodeMirror-hscrollbar::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: rgb(64,64,64);
+}
+
+.code-editor-container .CodeMirror-vscrollbar::-webkit-scrollbar {
+	width: 10px;
+	background-color: rgb(64,64,64);
+}
+
+
+.code-editor-container .CodeMirror-hscrollbar::-webkit-scrollbar {
+	height: 10px;
+	background-color: rgb(64,64,64);
+}
+
+.code-editor-container .CodeMirror-vscrollbar::-webkit-scrollbar-thumb, .code-editor-container .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(106,106,106);
+}
+
+/*.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}*/
+ .CodeMirror-focused .cm-matchhighlight {
+   background: orange;
+ }
+
+.CodeMirror-linenumber {
+	text-align: right;
+}
+
+.highlight-code {
+	background: black!important;
+}
+
+.read-only-code {
+	background: rgb(100,100,100)!important;
+}
+
+.code-nav-container .read-only-code {
+    opacity: .5;
+}
+
+.unchangable-tip {
+	position: absolute;
+	display: none;
+	left: 0px;
+	top: 0px;
+	width: 250px;
+	height: 45px;
+	z-index: 99999;
+	border: rgb(185,207,239) 1px solid;
+	border-radius: 5px;
+	font-size: 15px;
+	color:white;
+	background: rgb(71,71,71);
+	padding: 10px 0px;
+	text-align: center;
+}
+
+.code-nav-container {
+	z-index: 55; 
+	right:10px; 
+	width: 15%; 
+	position:absolute;
+    
+    
+    top: 0px;
+}
+
+.code-nav-container .CodeMirror {
+    /*border: 1px solid #eee;*/
+    height: auto;
+}
+.code-nav-container .CodeMirror-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.code-nav-overlay {
+	z-index: 44; 
+	position:absolute; 
+	left:0px; 
+	right: 0px; 
+	height: 200px; 
+	top: 0px; 
+	background: black; 
+	opacity: .4;
+	border-radius: 5px;
+	pointer-events: none;
+}
+
+.code-nav-container .CodeMirror {
+	font: 3px monospace;
+	box-shadow: -1px 0px 2px 1px rgb(39,40,34);
+    background: rgb(39,40,34);
+}
+
+.code-nav-container .CodeMirror-scroll {
+	overflow-x: hidden;
+}
+
+.code-nav-container .CodeMirror-hscrollbar {
+	overflow-x: hidden;
+}
+
+/*code finder*/
+.code-finder {
+    position: absolute;
+    display: none;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 80px;
+    background: black;
+    opacity: .7;
+    z-index: 99;
+    padding-top: 11px;
+    color: white;
+    overflow: visible!important;
+    font-size: 12px;
+}
+
+.code-finder > [viz-role=close-finder] {
+    background-image: url("../resources/closeFinder.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 11px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.code-finder > div {
+	display:-moz-box; /* Firefox */
+	display:-webkit-box; /* Safari and Chrome */
+	display:-ms-flexbox; /* Internet Explorer 10 */
+	display:box;
+    left: 0px;
+    right: 0px;
+    margin: 10px 5px;
+}
+
+.code-finder > div > * {
+    display: block;
+    opacity: 1.0;
+}
+
+.code-finder span {
+    text-align: right;
+    width: 80px;
+}
+.code-finder input {
+	-moz-box-flex:1.0; /* Firefox */
+	-webkit-box-flex:1.0; /* Safari and Chrome */
+	-ms-flex:1.0; /* Internet Explorer 10 */
+	box-flex:1.0;
+    margin: 0px 5px;
+    background: white;
+    height: 16px;
+}
+.code-finder > div > div[viz-role] {
+    width: 90px;
+    height: 18px;
+    margin: 0px 5px;
+    border-radius: 2px;
+    background: gray;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*fullscreenCodeEditor*/
+#fullscreenCodeEditor {
+	position: absolute;
+	right: 0px;
+	top: 35px;
+	bottom: 0px;
+	background: rgb(89, 89, 89);
+	border-radius: 8px 8px 0px 0px;
+}
+
+.vp-editor-title {
+	font-size: 12px;
+	color: white; 
+	font-weight: normal; 
+	padding-top: 4px;
+	padding-left: 20px;
+	height: 25px;
+}
+
+.vp-editor-edit-panel {
+	position:absolute; 
+	top: 5px; 
+	right:0px;
+	bottom:0px;
+	width:100%;
+}
+
+
+.vp-editor .handle {
+	left: 50%;
+	top: 0px;
+	bottom: 0px;
+	display: none;
+}
+
+.vp-editor-preview-panel {
+    position:absolute; 
+	padding-right: 4px;
+    left: 0px; 
+    top: 25px; 
+    bottom:0px;
+    width:50%;
+	display: none;
+}
+
+
+.vp-editor-edit-panel .nav.nav-tabs {
+    margin-left: 0px;
+    margin-top: 0px;
+    font-size: 12px;
+	background:transparent!important;
+}
+
+.vp-editor-edit-panel.code-only .nav.nav-tabs {
+    
+}
+
+.vp-editor-edit-panel .tab-content {
+	position:absolute;
+	left: 0px;
+	right: 0px;
+	top: 18px;
+	bottom: 0px;
+}
+
+
+/*tabs of edit panel*/
+.vp-editor-tab {
+	display: inline-block;
+	background: rgb(49,49,49)!important;
+	border-radius: 5px 5px 0px 0px!important;
+	box-shadow: 1px -1px 1px rgb(79,79,79);
+	height: 17px!important;
+	padding: 0px 15px 0 15px!important;
+	font-size: 12px!important;
+	color: rgb(140,140,140)!important;
+	text-align: center!important;
+}
+
+.active > .vp-editor-tab {
+	color: white!important;
+	border: 1px solid rgb(166,166,166)!important;
+	border-bottom-width: 0px;
+	background: rgb(75,80,75)!important;
+}
+
+
+
+/*buttons*/
+.vp-editor-btn-fullscreen {
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	z-index: 9;
+	background-image: url(../resources/btnExpand.png);
+}
+
+.vp-editor-btn-fullscreen.docked {
+	background-image: url(../resources/btnShrink.png);
+}
+
+
+.vp-editor-toggle {
+    position: absolute;
+    width: 102px;
+    height: 20px;
+    right: 30px;
+    top: 2px;
+    background-repeat: no-repeat;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.vp-editor-toggle.code {
+    background-image: url("../resources/toggleCode.png");
+}
+
+.vp-editor-toggle.preview {
+    background-image: url("../resources/togglePreview.png");
+}
+
+.vp-editor-toggle.code.preview {
+    background-image: url("../resources/toggleBoth.png");
+}
+
+.vp-editor-btn-apply {
+    position:absolute; 
+	padding: 0px 5px;
+    /*height: 20px;*/
+    right: 150px; 
+    top: 3px;
+	width: 74px;
+	height: 18px;
+    background: url(../resources/btnRun.png);
+    cursor:pointer;
+	z-index: 8;
+}
+
+.vp-editor-applied-tip {
+	position: fixed;
+	z-index: 99999;
+	display: none;
+}
+
+.vp-editor-applied-tip-close {
+	cursor: pointer;
+}
+
+#vp-editor-file-picker {
+	position:absolute; 
+	left:0; 
+	margin:0 0 0 -1px; 
+	padding:0; 
+	list-style:none;
+	display: none; 
+    min-width: 100px;
+	width: auto; 
+	font-family:Arial, Helvetica, sens-serif;
+	font-size:12px;
+	background: rgb(75, 80, 75);
+	border: 1px gray solid;
+	padding-top: 5px;
+	padding-bottom: 5px; 
+	z-index: 999;
+}
+
+#filePickerContainer {
+	position:relative;
+}
+
+#filePickerContainer.action {
+	color: white!important;
+	border: 1px solid rgb(166,166,166)!important;
+	border-bottom-width: 0px;
+	background: rgb(75,80,75)!important;
+}
+
+.candidateFile {
+	padding-left: 5px;
+	padding-right: 5px; 
+	font-weight: bold;
+	color: rgb(216,216,216);
+}
+
+.hoveredon {
+	background: rgb(216,216,216);
+	color: black;
+}
+

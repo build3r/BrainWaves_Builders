@@ -1,0 +1,33 @@
+{
+	version: "1.0.0",
+	chart: {
+		id: "id",
+		name: "name",
+		modules: {
+			plot: {
+				id: "id",
+				name: "name",
+				feeds: {
+					ds1: {
+						id: "id",
+						name: "name",
+						min: number,
+						max: number
+					},
+					ds2: same as ds1,
+					ms: {}
+				}
+			},
+			title: {property list + position},
+			legend: {property list + position}
+		},
+		code: {
+			lib: "js source code generated",
+			html: "html source code generated"
+		},
+		data: {
+			mapping: {},
+			table: [{}]
+		}
+	}
+}

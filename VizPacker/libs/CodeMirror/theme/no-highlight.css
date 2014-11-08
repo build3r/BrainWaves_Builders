@@ -1,0 +1,30 @@
+/* Taken from the popular Visual Studio Vibrant Ink Schema */
+
+.cm-s-no-highlight { background: rgb(75,80,75); color: rgb(123,124,116); }
+.cm-s-no-highlight .CodeMirror-selected { background: /*#35493c*/ orange !important; }
+
+/*.cm-s-no-highlight .CodeMirror-gutter { background: rgb(75,80,75); border-right: 1px solid #aaa; }
+.cm-s-no-highlight .CodeMirror-gutter-text { color: #d0d0d0; }
+.cm-s-no-highlight .CodeMirror-cursor { border-left: 1px solid white !important; }
+
+.cm-s-no-highlight .cm-keyword {  color: red; }
+.cm-s-no-highlight .cm-atom { color: #FC0; }
+.cm-s-no-highlight .cm-number { color:  #FFEE98; }
+.cm-s-no-highlight .cm-def { color: #8DA6CE; }
+.cm-s-no-highlight span.cm-variable-2, .cm-s-cobalt span.cm-tag { color: #FFC66D }
+.cm-s-no-highlight span.cm-variable-3, .cm-s-cobalt span.cm-def { color: #FFC66D }
+.cm-s-no-highlight .cm-operator { color: #888; }
+.cm-s-no-highlight .cm-comment { color: gray; font-weight: bold; }
+.cm-s-no-highlight .cm-string { color:  #A5C25C }
+.cm-s-no-highlight .cm-string-2 { color: red }
+.cm-s-no-highlight .cm-meta { color: #D8FA3C; }
+.cm-s-no-highlight .cm-error { border-bottom: 1px solid red; }
+.cm-s-no-highlight .cm-builtin { color: #8DA6CE; }
+.cm-s-no-highlight .cm-tag { color: #8DA6CE; }
+.cm-s-no-highlight .cm-attribute { color: #8DA6CE; }
+.cm-s-no-highlight .cm-header { color: #FF6400; }
+.cm-s-no-highlight .cm-hr { color: #AEAEAE; }
+.cm-s-no-highlight .cm-link { color: blue; }*/
+
+
+.cm-s-vibrant-ink .cm-searching {background-color: orangered;}

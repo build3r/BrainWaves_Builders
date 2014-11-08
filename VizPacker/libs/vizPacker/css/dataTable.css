@@ -1,0 +1,314 @@
+/* 
+    Document   : dataTable
+    Created on : Aug 23, 2013, 11:22:11 AM
+    Author     : i047188
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*data panel/table*/
+#dataPanel {
+	position: absolute;
+	display: none;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	width:1000px;
+	height:900px;
+	background: rgb(172,172,172);
+	opacity: 1; 
+	z-index: 999;
+}
+
+#dataModelTabContainer{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
+/* scroll bar style */
+#mainTabDataModel ::-webkit-scrollbar {
+    width: 10px;
+    height:10px;
+}
+ 
+#mainTabDataModel ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+    -webkit-border-radius: 5px;
+    height:20px;
+    border-radius: 5px;
+}
+ 
+#mainTabDataModel ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(57, 57, 57, 1);
+    border:2px solid rgba(255,255,255,0.5);
+}
+
+#mainTabDataModel ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(57,57,57,1); 
+}
+
+#mainTabDataModel ::-webkit-scrollbar-corner{
+	background-color:rgba(0,0,0,0);
+}
+
+#vp-dt-file-upload-area {
+    width:100%;
+    margin-bottom:20px;
+}
+
+.vp-dt-load{
+	display: none;
+	margin-bottom: 10px;
+	min-width:350px;
+	max-width: 628px; 
+}
+
+.vp-dt-load-text{
+	width:100%;
+	height:16px;
+/*	display:inline-block;*/
+	border:0px;
+	color: rgb(128,128,128);
+	padding-left:10px;
+	background-color:rgb(191,191,191);
+	border:1px solid white;
+	margin-bottom:1px;
+	margin-top:1px;
+}
+
+.vp-dt-load-btn, #vp-dt-apply-btn{
+	width:83px;
+	height:20px;
+	display:inline-block;
+	font-size:12px;
+	font-weight:normal;
+	background-color:rgb(133,133,133);
+	border:1px solid white;
+	border-radius:3px;
+	color: white;
+	text-align:center;
+	font-family:Arial, Helvetica, sens-serif;
+	cursor:pointer;
+	/*float:right;*/
+	margin-right:0px;
+	margin-left:10px;
+}
+
+.vp-dt-add-row{
+	background-color:rgb(127,127,127);
+	width:20px;
+	height:20px;
+	color:white;
+	border:1px solid rgb(89,89,89);
+	text-align:center;
+	font-weight:bold;
+	font-size:24px;
+}
+
+.vp-dt-add-field{
+	display:inline-block;
+	background-color:rgb(201,201,201);
+	width:20px;
+	height:20px;
+	top:0px;
+	border:1px solid rgb(89,89,89);
+	text-align:center;
+	font-weight:bold;
+	font-size:24px;
+}
+
+.vp-dt-table-template {
+	display: none;
+}
+
+.vp-dt-container {
+	position:relative;
+/*	min-width:520px;*/
+	/*max-width: 628px;*/ 
+	margin-left:40px;
+	margin-top:20px;
+	margin-right:40px;
+}
+
+.vp-dt-table {
+	color: white;
+	display: inline-block;
+	position: relative;
+/*	max-width: 720px;*/
+	overflow: hidden;
+	border: solid 1px rgb(89,89,89);
+}
+
+.vp-dt-table thead {
+	position: relative;
+	display: block;
+	
+	color: black;
+}
+
+.vp-dt-table tbody {
+	position: relative;
+	display: block;
+	overflow:auto;
+	max-width:720px;
+	max-height: 576px;
+}
+
+.vp-dt-table th, .vp-dt-table td {
+	min-width: 120px;
+	max-width: 120px;
+	
+	height:20px;
+	border: solid 1px rgb(89,89,89);
+	font-family:Arial, Helvetica, sens-serif;
+	font-size:12px;
+}
+.vp-dt-table th {
+	text-align: right;
+	font-weight:normal;
+	border-bottom: 2px gray solid;
+	background-color:rgb(216,216,216);
+}
+.vp-dt-table td {
+	height:20px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	text-align: left;
+	cursor: text;
+	font-weight:normal;
+	background-color:rgb(127,127,127);
+	white-space:nowrap;
+}
+
+.vp-dt-table-cell-measure{
+	text-align: right;
+}
+
+.vp-dt-field-name{
+	display:inline-block;
+	padding-right:3px;
+	pointer-events:none;
+	width:60px;
+	font-weight:bold;
+	height:25px;
+	line-height:30px;
+	top:0px;
+	left:0px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.vp-dt-field-type-picker-button, .vp-dt-field-remove, .vp-dt-field-type, .vp-dt-field-type-set-name {
+	cursor: pointer;
+}
+
+.vp-dt-field-remove{
+	cursor: pointer;
+	position:absolute;
+	left:0px;
+	top:6px;
+	margin-top:3px;
+	margin-left:3px;
+	display:none;
+}
+
+.vp-dt-field-type {
+    font-weight: bold;
+}
+
+.vp-dt-field-type-picker {
+	position: fixed; 
+	display: none; 
+    min-width: 200px;
+	width: auto; 
+	color: black;
+	font-family:Arial, Helvetica, sens-serif;
+	font-size:12px;
+	background: rgb(216,216,216);
+	border: 1px white solid;
+}
+
+.vp-dt-field-type-set-radio {
+    margin-top:0px!important;
+    margin-left:5px!important;
+    margin-right: 2px!important;
+    margin-bottom: 2px!important;
+}
+
+.vp-dt-field-type-set-name {
+    display: inline-block;
+    margin-top:3px!important;
+	font-size:12px;
+	text-align:center;
+}
+
+#vpDTSetNameInput {
+    text-align: left; 
+    width: 50px; 
+    height: 20px; 
+    background:rgb(70,70,70); 
+    color:rgb(150,150,150);
+    border:1px solid rgb(150,150,150);
+    margin: 0px!important;
+    padding: 0px!important;
+}
+
+.vp-dt-info-btn {
+    display:inline-block;
+    padding-left:6px!important;
+    padding-right:20px!important;
+}
+
+.vp-dt-field-type-picker li{
+	list-style: none;
+}
+.vp-dt-field-type-icon {
+    line-height:20px;
+    vertical-align:baseline;
+}
+.vp-dt-field-type-picker-button{
+    line-height:20px;
+    vertical-align:baseline;  
+}
+.vp-dt-field-type-picker div > .vp-dt-field-type-picker-submenu {
+	display: none;
+}
+
+.vp-dt-field-type-picker-menu :hover{
+	background-color: rgb(127,127,127);
+}
+
+.vp-dt-field-type-picker-cur-idx{
+	font-family:Arial, Helvetica, sens-serif;
+	font-size:12px;
+	color: rgb(127,127,127);
+	padding-left:10px;
+}
+#vp-dt-info_bubble{
+	font-family:Arial, Helvetica, sens-serif;
+	font-size:12px;
+	line-height:100%;
+}
+#vp-dt-info_bubble_content{
+	border-radius:5px;
+	padding:10px;
+	position:absolute;
+	left:7px;
+	color:white;
+	max-width:277px;
+	display:inline-block;
+	background-color:rgba(0,0,0,0.8);
+	-webkit-user-select: none;
+}
+
+.vp-dt-field-type-picker-submenu :hover, .vp-dt-field-type-picker-menu :hover{
+	color:white;
+	background-color: rgb(127,127,127);
+}
